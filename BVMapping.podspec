@@ -87,7 +87,7 @@ Pod::Spec.new do |s|
   # Specify a list of libraries that the application needs to link
   # against for this Pod to work.
   #
-  # s.library   = 'iconv'
+  s.library   = 'xml2'
   # s.libraries = 'iconv', 'xml2'
 
   # If this Pod uses ARC, specify it like so.
