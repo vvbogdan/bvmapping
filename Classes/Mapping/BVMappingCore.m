@@ -14,7 +14,7 @@
 @interface BVMappingCore ()
 
 @property (nonatomic, strong) NSMutableDictionary * mappingsInfo;
-@property (nonatomic) NSObject<BVMappingParseProtocol> * parserObject;
+@property (nonatomic, strong) NSObject<BVMappingParseProtocol> * parserObject;
 
 @end
 
@@ -46,14 +46,22 @@
 
 
 + (void)setParserClass:(Class)clazz {
-    [[BVMappingCore shared] setParserObject:[clazz new] ];
+    [[BVMappingCore shared] setParserObject:[clazz new]];
 }
 
 
 + (id)applyMappingFromData:(NSData *)data onClass:(Class)clazz {
+    return [self applyMappingFromData:data onClass:clazz error:nil];
+}
 
-    NSError * error;
+
++ (id)applyMappingFromData:(NSData *)data onClass:(Class)clazz error:(NSError *)error {
+
     NSObject * sourceDocument = [[[BVMappingCore shared] parserObject] documentWithData:data error:&error];
+
+    if ( error ) {
+        return nil;
+    }
 
     NSObject * rootElement = [[[BVMappingCore shared] parserObject] rootObjectWithDocumentObject:sourceDocument];
 

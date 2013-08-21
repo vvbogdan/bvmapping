@@ -11,5 +11,6 @@
 + (void)setParserClass:(Class)clazz;
 
 + (id)applyMappingFromData:(NSData *)data onClass:(Class)clazz;
++ (id)applyMappingFromData:(NSData *)data onClass:(Class)clazz error:(NSError *)error;
 
 @end
